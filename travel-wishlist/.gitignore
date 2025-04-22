@@ -3,6 +3,9 @@ node_modules
 build
 tmp
 
+# The development sqlite file
+database/db
+
 # Secrets
 .env
 .env.local
