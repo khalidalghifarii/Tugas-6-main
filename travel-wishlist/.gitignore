@@ -4,7 +4,7 @@ build
 tmp
 
 # The development sqlite file
-database/db
+database/db/*
 
 # Secrets
 .env
