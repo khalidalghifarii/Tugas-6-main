@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>
+      Tambah Destinasi - Travel Wishlist
+    </title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+      }
+      
+      .form-group {
+        margin-bottom: 15px;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      
+      input,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      
+      button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      button:hover {
+        background-color: #2980b9;
+      }
+      
+      .alert {
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+      }
+      
+      .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+      
+      .nav {
+        margin-bottom: 20px;
+      }
+      
+      .nav a {
+        color: #3498db;
+        text-decoration: none;
+      }
+      
+      .nav a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <a href="/destinations">← Kembali ke Daftar Destinasi</a>
+      </div>
+
+      <h1>
+        Tambah Destinasi Wisata Baru
+      </h1>
+
+      @if(flashMessages.has('error'))
+        <div class="alert alert-danger">
+          {{ flashMessages.get('error') }}
+        </div>
+      @endif
+      
+      <form action="/destinations" method="POST">
+        {{ csrfField() }}
+        <div class="form-group">
+          <label for="name">Nama Destinasi*</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="country">Negara*</label>
+          <input type="text" id="country" name="country" required />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Deskripsi</label>
+          <textarea id="description" name="description" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="best_time_to_visit">Waktu Terbaik untuk Berkunjung</label>
+          <input
+            type="text"
+            id="best_time_to_visit"
+            name="best_time_to_visit"
+            placeholder="Contoh: Juni - Agustus"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="estimated_budget">Perkiraan Budget (IDR)</label>
+          <input type="number" id="estimated_budget" name="estimated_budget" placeholder="Contoh: 5000000" />
+        </div>
+
+        <button type="submit">Simpan Destinasi</button>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>
+      {{ destination.name }} - Travel Wishlist
+    </title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+      
+      .nav {
+        margin-bottom: 20px;
+      }
+      
+      .nav a {
+        color: #3498db;
+        text-decoration: none;
+      }
+      
+      .nav a:hover {
+        text-decoration: underline;
+      }
+      
+      .meta {
+        color: #7f8c8d;
+        margin-bottom: 20px;
+        font-size: 1.1em;
+      }
+      
+      .section {
+        margin-bottom: 25px;
+      }
+      
+      .section h2 {
+        color: #2c3e50;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+      }
+      
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      
+      .info-item {
+        margin-bottom: 10px;
+      }
+      
+      .info-label {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <a href="/destinations">← Kembali ke Daftar Destinasi</a>
+      </div>
+
+      <h1>
+        {{ destination.name }}
+      </h1>
+      <div class="meta">
+        {{ destination.country }}
+      </div>
+
+      <div class="section">
+        <h2>
+          Tentang Destinasi
+        </h2>
+        <p>
+          {{ destination.description || 'Tidak ada deskripsi untuk destinasi ini.' }}
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>
+          Informasi Tambahan
+        </h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">
+              Waktu Terbaik untuk Berkunjung
+            </div>
+            <div>
+              {{ destination.best_time_to_visit || 'Belum ditentukan' }}
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-label">
+              Perkiraan Budget
+            </div>
+            <div>
+              @if(destination.estimated_budget)
+                Rp {{ destination.estimated_budget.toLocaleString('id-ID') }}
+              @else
+                Belum ditentukan
+              @endif
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

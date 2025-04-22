@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>
+      Daftar Destinasi - Travel Wishlist
+    </title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+      }
+      
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      
+      .btn {
+        background-color: #3498db;
+        color: white;
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        display: inline-block;
+      }
+      
+      .btn:hover {
+        background-color: #2980b9;
+      }
+      
+      .alert {
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+      }
+      
+      .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+      
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+      
+      .card h2 {
+        margin-top: 0;
+        color: #3498db;
+      }
+      
+      .card-meta {
+        color: #7f8c8d;
+        font-size: 0.9em;
+        margin-bottom: 10px;
+      }
+      
+      .card-description {
+        margin-bottom: 15px;
+      }
+      
+      .card-footer {
+        display: flex;
+        justify-content: space-between;
+      }
+      
+      .empty-state {
+        text-align: center;
+        padding: 30px;
+        color: #7f8c8d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+          Daftar Destinasi Wisata
+        </h1>
+        <a href="/destinations/create" class="btn">Tambah Destinasi</a>
+      </div>
+
+      @if(flashMessages.has('success'))
+        <div class="alert alert-success">
+          {{ flashMessages.get('success') }}
+        </div>
+      @endif
+      
+      @if(destinations.length > 0)
+        @each(destination in destinations)
+          <div class="card">
+            <h2>
+              {{ destination.name }}
+            </h2>
+            <div class="card-meta">
+              {{ destination.country }}
+            </div>
+            <div class="card-description">
+              {{ destination.description || 'Tidak ada deskripsi.' }}
+            </div>
+            <div class="card-footer">
+              <div>
+                @if(destination.estimated_budget)
+                  <strong>Budget:</strong>Rp {{ destination.estimated_budget.toLocaleString('id-ID') }}
+                @else
+                  <span>Budget belum ditentukan</span>
+                @endif
+              </div>
+              <a href="/destinations/{{ destination.id }}">Lihat Detail</a>
+            </div>
+          </div>
+        @endeach
+      @else
+        <div class="empty-state">
+          <p>
+            Belum ada destinasi wisata. Tambahkan destinasi pertamamu!
+          </p>
+          <a href="/destinations/create" class="btn">Tambah Destinasi</a>
+        </div>
+      @endif
+    </div>
+  </body>
+</html>
